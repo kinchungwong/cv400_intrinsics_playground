@@ -104,6 +104,51 @@ void demo()
 
 ----
 
+## Adding ```v_insert``` as an opposite analogue (writing vs reading) of ```v_extract```
+
+Date: 2018-04-09
+
+### Description
+
+Given two or more *destination* (writeable) vectors, which shall be treated as a sequence from their concatenation, ```v_insert``` overwrites a portion of that sequence starting at a given offset (which shall be compile-time constant). The amount of data overwritten is exactly one vector worth.
+
+### Files (header-only)
+
+```cpp
+// ======
+// These headers must be included (or combined) in this ordering.
+// ======
+#include "v_sse_traits.h"
+#include "v_sse_reinterpret.h"
+#include "v_reinterpret_as.h"
+#include "v_insert_cv400.h"
+#include "v_insert_array_cv400.h"
+```
+
+### Demo: 
+
+```cpp
+template <int lane_start>
+void test_insert_std_array()
+{
+    // mutable array
+    std::array<cv::v_float32x4, 3> dest =
+    {
+        cv::v_float32x4{ 11, 12, 13, 14 },
+        cv::v_float32x4{ 21, 22, 23, 24 },
+        cv::v_float32x4{ 31, 32, 33, 34 },
+    };
+    const cv::v_float32x4 data_to_insert = { 255, 256, 257, 258 };
+    cv::cv400::v_insert<lane_start>(dest, data_to_insert);
+    //
+    // After calling "v_insert", part of the mutable array "dest" 
+    // will have been modified.
+    //
+}
+```
+
+----
+
 ***End of README.md***
 
 ----
