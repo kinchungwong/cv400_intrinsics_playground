@@ -149,6 +149,12 @@ void test_insert_std_array()
 
 ----
 
+## Gallery of "risky" C++ code (template, macro, namespace magic, etc.)
+
+**See** [**RISKY.md**](./RISKY.md)
+
+----
+
 ***End of README.md***
 
 ----
