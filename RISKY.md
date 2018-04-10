@@ -30,6 +30,11 @@ Code in this section are labeled "risky" because they might be:
  * The input argument will be qualified as const-reference.
  * The original function needs to have its function pointer taken (i.e. it must be decayable to a function pointer, in C++ technical speak.)
  * If the original function is overloaded, or if it is a macro, the following code might not work.
+ * Examples of situations that will not work:
+   * Same function name is defined in multiple (nested) namespaces and are pulled into the current namespace with the ```using namespace_name;``` statement
+   * Same function name is overloaded with independently-declared templates
+   * One of the function template of same name is defined with unconstrained template argument (i.e. it is too greedy trying to match anything thrown at it).
+   * Same function name maps to a C++-style macro
  * It is already known that some functions in OpenCV intrinsics do not work with the following code, for the reason stated above.
 
 #### Sample usage from programmer-user's perspective
