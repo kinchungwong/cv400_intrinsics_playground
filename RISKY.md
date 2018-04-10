@@ -32,7 +32,31 @@ Code in this section are labeled "risky" because they might be:
  * If the original function is overloaded, or if it is a macro, the following code might not work.
  * It is already known that some functions in OpenCV intrinsics do not work with the following code, for the reason stated above.
 
-#### Code
+#### Sample usage from programmer-user's perspective
+
+The goal is to make it easy to use from a user's perspective. Remember that the "user" is a programmer who use this library feature. The goal isn't met if it doesn't work as intended, or if it doesn't work for all scenarios one can imagine.
+
+```cpp
+void test_demo()
+{
+    const std::array<cv::v_float32x4, 2> aa =
+    {
+        cv::v_float32x4{ 1.0f, 2.0f, 3.0f, 4.0f },
+        cv::v_float32x4{ 5.0f, 6.0f, 7.0f, 8.0f }
+    };
+    const std::array<cv::v_float32x4, 2> bb =
+    {
+        cv::v_float32x4{ 7.5f, 6.5f, 5.5f, 4.5f },
+        cv::v_float32x4{ 3.5f, 2.5f, 1.5f, 0.5f }
+    };
+    const std::array<cv::v_float32x4, 2> cc = cv::v_mul(aa, bb);
+    const std::array<cv::v_float32x4, 2> dd = cv::v_div(aa, bb);
+    const std::array<cv::v_float32x4, 2> ee = cv::v_min(aa, bb);
+    const std::array<cv::v_float32x4, 2> ff = cv::v_absdiff(aa, bb);
+}
+```
+
+#### Code (library implementation)
 
 ```cpp
 namespace cv
